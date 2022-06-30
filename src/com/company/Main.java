@@ -194,9 +194,16 @@ public class Main {
     isBombExploded = true;
   }
 
-  public void checkStatusBomb(){
+  public void checkEnemeySoldiersStatus(){
     if(enemySoldiers <= 0){
       ui.playerWon();
+      runLoop = false;
+    }
+  }
+
+  public void checkPlayerSoldiersStatus() {
+    if(playerSoldiers <= 0){
+      ui.enemyWon();
       runLoop = false;
     }
   }
@@ -259,10 +266,12 @@ public class Main {
         }
         default -> ui.invalidInput();
       }
-      checkStatusBomb();
+      checkEnemeySoldiersStatus();
+      checkPlayerSoldiersStatus();
     }
     System.out.println("Exiting program...");
   }
+
 
   public static void main(String[] args) {
     Main main = new Main();

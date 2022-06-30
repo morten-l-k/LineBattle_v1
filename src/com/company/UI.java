@@ -61,4 +61,8 @@ public class UI {
   public void playerWon() {
     System.out.println("You have defeated the enemy's soldiers. Congratulations, you won!");
   }
+
+  public void enemyWon() {
+    System.out.println("The enemy has defeated all your soldiers. You lost!");
+  }
 }
