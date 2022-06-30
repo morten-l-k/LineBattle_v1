@@ -65,4 +65,12 @@ public class UI {
   public void enemyWon() {
     System.out.println("The enemy has defeated all your soldiers. You lost!");
   }
+
+  public void playAgain() {
+    System.out.println("Do you want to play again?");
+    System.out.println("\n" + """
+        1 - Yes
+        2 - No
+        """);
+  }
 }

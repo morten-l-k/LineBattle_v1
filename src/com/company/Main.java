@@ -194,17 +194,19 @@ public class Main {
     isBombExploded = true;
   }
 
-  public void checkEnemeySoldiersStatus(){
-    if(enemySoldiers <= 0){
+  public void checkEnemeySoldiersStatus() {
+    if (enemySoldiers <= 0) {
       ui.playerWon();
       runLoop = false;
     }
   }
 
   public void checkPlayerSoldiersStatus() {
-    if(playerSoldiers <= 0){
-      ui.enemyWon();
-      runLoop = false;
+    if (enemySoldiers > 0) {
+      if (playerSoldiers <= 0) {
+        ui.enemyWon();
+        runLoop = false;
+      }
     }
   }
 
@@ -251,10 +253,10 @@ public class Main {
         case "5" -> {
           if (isBombPlaced == true) {
             detonateBomb();
-            if (playerLocation == 0){
+            if (playerLocation == 0) {
               playerSoldiers = 0;
             } else ui.playerWonBombVictory();
-              runLoop = false;
+            runLoop = false;
           } else ui.invalidDetonateBomb();
         }
         case "6" -> {
@@ -269,12 +271,31 @@ public class Main {
       checkEnemeySoldiersStatus();
       checkPlayerSoldiersStatus();
     }
-    System.out.println("Exiting program...");
+  }
+
+  public void runProgram() {
+    run();
+    boolean checkInput = true;
+    while (checkInput) {
+      ui.playAgain();
+      String input = sc.nextLine();
+      switch (input) {
+        case "1" -> {
+          runLoop = true;
+          Main main = new Main();
+          main.run();
+        }
+        case "2" -> {
+          checkInput = false;
+          System.out.println("Exitting program");
+        }
+      }
+    }
   }
 
 
   public static void main(String[] args) {
     Main main = new Main();
-    main.run();
+    main.runProgram();
   }
 }
