@@ -141,15 +141,12 @@ public class Main {
     return close;
   }
 
-  public void firstMove(String playerType) {
-    if (playerType == "Player") {
-      int tal = 21 - randNumber1_6();
-      setPlayerLocation(tal);
-    } else if (playerType == "Enemy") {
-      int tal = 0 + randNumber1_6();
-      setEnemyLocation(tal);
+  public void firstMove() {
+      int numberPlayer = 21 - randNumber1_6();
+      setPlayerLocation(numberPlayer);
+      int numberEnemy = randNumber1_6();
+      setEnemyLocation(numberEnemy);
     }
-  }
 
   public void setPlayerLocation(int playerLocation) {
     this.playerLocation = playerLocation;
@@ -186,12 +183,12 @@ public class Main {
   }
 
   //In current version, only player can place and detonate bomb
-  public void setBombPlaced(boolean bombPlaced) {
+  public void isBombPlaced(boolean bombPlaced) {
     isBombPlaced = bombPlaced;
   }
 
-  public void detonateBomb() {
-    isBombExploded = true;
+  public void isBombDetonated(boolean bombDetonated) {
+    isBombExploded = bombDetonated;
   }
 
   public void checkEnemeySoldiersStatus() {
@@ -213,8 +210,7 @@ public class Main {
   public void run() {
     ui.firstMove();
     System.out.println(Arrays.toString(board));
-    firstMove("Player");
-    firstMove("Enemy");
+    firstMove();
     while (runLoop) {
       ui.menu();
       ui.statusBar(playerFirepower, playerSoldiers, enemyFirepower, enemySoldiers);
@@ -246,13 +242,13 @@ public class Main {
         }
         case "4" -> {
           if (playerLocation == 0) {
-            setBombPlaced(true);
+            isBombPlaced(true);
             ui.bombPlaced();
           } else ui.invalidBombPlaced();
         }
         case "5" -> {
-          if (isBombPlaced == true) {
-            detonateBomb();
+          if (isBombPlaced) {
+            isBombDetonated(true);
             if (playerLocation == 0) {
               playerSoldiers = 0;
             } else ui.playerWonBombVictory();
