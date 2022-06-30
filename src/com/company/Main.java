@@ -287,7 +287,7 @@ public class Main {
         }
         case "2" -> {
           checkInput = false;
-          System.out.println("Exitting program");
+          ui.ExitingProgram();
         }
       }
     }

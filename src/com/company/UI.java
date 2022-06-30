@@ -73,4 +73,8 @@ public class UI {
         2 - No
         """);
   }
+
+  public void ExitingProgram() {
+    System.out.println("Exitting program");
+  }
 }
