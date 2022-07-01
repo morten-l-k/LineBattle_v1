@@ -256,28 +256,16 @@ public class Main {
       ui.choice();
       String choice = sc.nextLine();
       switch (choice) {
-        case "1" -> {
-          forwardMove();
-        }
-        case "2" -> {
-          backwardMove();
-        }
-        case "3" -> {
-          attackMove();
-        }
-        case "4" -> {
-          placeBomb();
-        }
-        case "5" -> {
-          detonateBomb();
-        }
+        case "1" -> forwardMove();
+        case "2" -> backwardMove();
+        case "3" -> attackMove();
+        case "4" -> placeBomb();
+        case "5" -> detonateBomb();
         case "6" -> {
           System.out.println(Arrays.toString(board));
           getBoard();
         }
-        case "99" -> {
-          runLoop = false;
-        }
+        case "99" -> runLoop = false;
         default -> ui.invalidInput();
       }
       checkEnemeySoldiersStatus();
