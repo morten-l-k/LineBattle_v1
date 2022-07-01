@@ -134,11 +134,7 @@ public class Main {
   }
 
   public boolean isEnemyClose() {
-    boolean close = false;
-    if (playerLocation - enemyLocation < 3 && playerLocation - enemyLocation > -4) {
-      close = true;
-    }
-    return close;
+    return playerLocation - enemyLocation < 3 && playerLocation - enemyLocation > -4;
   }
 
   public void firstMove() {
