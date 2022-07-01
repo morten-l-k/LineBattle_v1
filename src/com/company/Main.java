@@ -207,6 +207,48 @@ public class Main {
     }
   }
 
+  public void detonateBomb() {
+    if (isBombPlaced) {
+      setBombDetonated(true);
+      if (playerLocation == 0) {
+        playerSoldiers = 0;
+      } else ui.playerWonBombVictory();
+      runLoop = false;
+    } else ui.invalidDetonateBomb();
+  }
+
+  public void placeBomb() {
+    if (playerLocation == 0) {
+      setBombPlaced(true);
+      ui.bombPlaced();
+    } else ui.invalidBombPlaced();
+  }
+
+  public void attackMove() {
+    int randomNumberPlayer = subtractPlayerFirepower();
+    subtractEnemySoldiers(randomNumberPlayer);
+    int randomNumberEnemy = subtractEnemyFirepower();
+    subtractPlayerSoldiers(randomNumberEnemy);
+  }
+
+  public void backwardMove() {
+    movePlayerBackward(randNumberBackwardMove());
+    increasePlayerFirepower();
+    moveEnemyBackward(randNumberBackwardMove());
+    increaseEnemyFirepower();
+    if (isEnemyClose()) {
+      ui.enemyIsClose(playerLocation, enemyLocation);
+    }
+  }
+
+  public void forwardMove() {
+    movePlayerForward(randNumberForwardMove());
+    moveEnemyForward(randNumberForwardMove());
+    if (isEnemyClose()) {
+      ui.enemyIsClose(playerLocation, enemyLocation);
+    }
+  }
+
   public void run() {
     ui.firstMove();
     System.out.println(Arrays.toString(board));
@@ -222,34 +264,16 @@ public class Main {
           forwardMove();
         }
         case "2" -> {
-          movePlayerBackward(randNumberBackwardMove());
-          increasePlayerFirepower();
-          moveEnemyBackward(randNumberBackwardMove());
-          increaseEnemyFirepower();
-          if (isEnemyClose()) {
-            ui.enemyIsClose(playerLocation, enemyLocation);
-          }
+          backwardMove();
         }
         case "3" -> {
-          int randomNumberPlayer = subtractPlayerFirepower();
-          subtractEnemySoldiers(randomNumberPlayer);
-          int randomNumberEnemy = subtractEnemyFirepower();
-          subtractPlayerSoldiers(randomNumberEnemy);
+          attackMove();
         }
         case "4" -> {
-          if (playerLocation == 0) {
-            setBombPlaced(true);
-            ui.bombPlaced();
-          } else ui.invalidBombPlaced();
+          placeBomb();
         }
         case "5" -> {
-          if (isBombPlaced) {
-            setBombDetonated(true);
-            if (playerLocation == 0) {
-              playerSoldiers = 0;
-            } else ui.playerWonBombVictory();
-            runLoop = false;
-          } else ui.invalidDetonateBomb();
+          detonateBomb();
         }
         case "6" -> {
           System.out.println(Arrays.toString(board));
@@ -262,14 +286,6 @@ public class Main {
       }
       checkEnemeySoldiersStatus();
       checkPlayerSoldiersStatus();
-    }
-  }
-
-  private void forwardMove() {
-    movePlayerForward(randNumberForwardMove());
-    moveEnemyForward(randNumberForwardMove());
-    if (isEnemyClose()) {
-      ui.enemyIsClose(playerLocation, enemyLocation);
     }
   }
 
