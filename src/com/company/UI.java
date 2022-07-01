@@ -29,8 +29,8 @@ public class UI {
   }
 
   public void enemyIsClose(int playerLocation, int enemyLocation) {
-    int tileDistane = playerLocation - enemyLocation;
-    System.out.println(RED + "Beware: The scout reports that the enemy is " + tileDistane + " tiles away from you!" + RESET);
+    int tileDistance = playerLocation - enemyLocation;
+    System.out.println(RED + "Beware: The scout reports that the enemy is " + tileDistance + " tiles away from you!" + RESET);
   }
 
   public void statusBar(int playerFirepower, int playerSoldiers, int enemyFirepower, int enemySoldiers) {
