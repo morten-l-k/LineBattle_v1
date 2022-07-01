@@ -183,11 +183,11 @@ public class Main {
   }
 
   //In current version, only player can place and detonate bomb
-  public void isBombPlaced(boolean bombPlaced) {
+  public void setBombPlaced(boolean bombPlaced) {
     isBombPlaced = bombPlaced;
   }
 
-  public void isBombDetonated(boolean bombDetonated) {
+  public void setBombDetonated(boolean bombDetonated) {
     isBombExploded = bombDetonated;
   }
 
@@ -219,11 +219,7 @@ public class Main {
       String choice = sc.nextLine();
       switch (choice) {
         case "1" -> {
-          movePlayerForward(randNumberForwardMove());
-          moveEnemyForward(randNumberForwardMove());
-          if (isEnemyClose()) {
-            ui.enemyIsClose(playerLocation, enemyLocation);
-          }
+          forwardMove();
         }
         case "2" -> {
           movePlayerBackward(randNumberBackwardMove());
@@ -242,13 +238,13 @@ public class Main {
         }
         case "4" -> {
           if (playerLocation == 0) {
-            isBombPlaced(true);
+            setBombPlaced(true);
             ui.bombPlaced();
           } else ui.invalidBombPlaced();
         }
         case "5" -> {
           if (isBombPlaced) {
-            isBombDetonated(true);
+            setBombDetonated(true);
             if (playerLocation == 0) {
               playerSoldiers = 0;
             } else ui.playerWonBombVictory();
@@ -266,6 +262,14 @@ public class Main {
       }
       checkEnemeySoldiersStatus();
       checkPlayerSoldiersStatus();
+    }
+  }
+
+  private void forwardMove() {
+    movePlayerForward(randNumberForwardMove());
+    moveEnemyForward(randNumberForwardMove());
+    if (isEnemyClose()) {
+      ui.enemyIsClose(playerLocation, enemyLocation);
     }
   }
 
